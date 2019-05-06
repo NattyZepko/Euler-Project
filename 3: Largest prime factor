@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EulerProjectNatty
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("The prime factors of 13195 are 5, 7, 13 and 29.\nWhat is the largest prime factor of the number 600851475143 ?");
+            long n = 600851475143;
+            long  b;
+            for (b = 2; n > 1; b++)
+                if (n % b == 0)
+                {
+                    int x = 0;
+                    while (n % b == 0)
+                    {
+                        n /= b;
+                        x++;
+                    }
+                    Console.WriteLine("{0} is a prime factor {1} times!", b, x);
+                }
+            //Console.WriteLine("Solution: " + sol);
+        }
+    }
+}
+
+
+The prime factors of 13195 are 5, 7, 13 and 29.
+What is the largest prime factor of the number 600851475143 ?
+71 is a prime factor 1 times!
+839 is a prime factor 1 times!
+1471 is a prime factor 1 times!
+6857 is a prime factor 1 times!
+Press any key to continue . . .
