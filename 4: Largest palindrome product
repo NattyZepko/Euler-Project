@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EulerProjectNatty
+{
+    class Program
+    {
+        public static bool IsPalindrome(string value)
+        {
+            int min = 0;
+            int max = value.Length - 1;
+            while (true)
+            {
+                if (min > max)
+                {
+                    return true;
+                }
+                char a = value[min];
+                char b = value[max];
+                if (char.ToLower(a) != char.ToLower(b))
+                {
+                    return false;
+                }
+                min++;
+                max--;
+            }
+        }
+
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("A palindromic number reads the same both ways.\nThe largest palindrome made from the product of two 2 - digit numbers is 9009 = 91 × 99.\nFind the largest palindrome made from the product of two 3 - digit numbers.");
+            int n, res = 0;
+            for (int i=100;i<=999;i++)
+            {
+                for (int j=100; j<=999; j++)
+                {
+                    n = i * j;
+                    if ((IsPalindrome(n.ToString())) && (n > res))
+                        res = n;
+                }
+            }
+            Console.WriteLine("Solution: " + res);
+        }
+    }
+}
+
+A palindromic number reads the same both ways.
+The largest palindrome made from the product of two 2 - digit numbers is 9009 = 91 × 99.
+Find the largest palindrome made from the product of two 3 - digit numbers.
+Solution: 906609
+Press any key to continue . . .
