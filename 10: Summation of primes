@@ -1,0 +1,36 @@
+namespace EulerProjectNatty
+{
+    class Program
+    {
+        public static bool Isprime(int num)
+        {
+            if (num < 0)
+                return false;
+            if ((num == 0) || (num == 1))
+                return false;
+            if ((num == 2) || (num == 3))
+                return true;
+            for (int i = 2; i < num; i++)
+                if (num % i == 0)
+                    return false;
+            return true;
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.\n\nFind the sum of all the primes below two million.\n");
+            long solution = 0;
+            for (int i = 0; i <= 2000000; i++)
+                if (Isprime(i))
+                    solution += i;
+            Console.WriteLine("Solution: " + solution);
+        }
+    }
+}
+
+
+The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+
+Find the sum of all the primes below two million.
+Solution: 142913828922
+Press any key to continue . . .
