@@ -1,0 +1,133 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EulerProjectNatty
+{
+    
+    class Program
+    {
+        public static int[] mybignumber = new int[320];
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Give me a number and i calculate the sum of the total letter used");
+            Console.WriteLine("while writing until it");
+            Console.WriteLine("");
+            Console.WriteLine("For Ex, total letter number will be 19 if you give me 5 --> ");
+            Console.WriteLine("one = 3, two = 3, three = 5, four = 3, five = 4 --> total is 19");
+            Console.WriteLine("");
+            Console.WriteLine("i dont count spaces or hyphens");
+            Console.WriteLine("342 (three hundred and forty-two) will be 23");
+            Console.WriteLine("and 115 (one hundred and fifteen) will be 20");
+            Console.WriteLine("");
+            Console.WriteLine("so give me the number now.");
+            Console.WriteLine("but dont pass one thousand!");
+
+            UInt32 MaxVal = Convert.ToUInt32(Console.ReadLine());
+
+            UInt32[] Ones = new UInt32[9] { 3, 3, 5, 4, 4, 3, 5, 5, 4 }; // between 1-9
+            UInt32[] OnesTens = new UInt32[10] { 3, 6, 6, 8, 8, 7, 7, 9, 8, 8 }; // between 10-19
+            UInt32[] Tens = new UInt32[8] { 6, 6, 5, 5, 5, 7, 6, 6 }; // 20 30 40 50 60 70 80 90 
+            UInt32[] Hundreds = new UInt32[9] { 10, 10, 12, 11, 11, 10, 12, 12, 11 }; // 100 200 300 400 500 600 700 800 900 
+            UInt32 And = 3;
+            UInt32 OneThousand = 11;
+
+            UInt32 Sums = 0;
+            UInt32 i;
+
+            for (i = 1; i <= MaxVal; i++)
+            {
+                if (i < 10) // smaller then 10
+                {
+                    Sums += Ones[i - 1];
+                }
+
+                if ((i >= 10) && (i < 20)) // between 10-20
+                {
+                    Sums += OnesTens[i % 10];
+                }
+
+                if (((i % 10) == 0) && (i >= 20) && (i < 100)) // between 10-100 and multiples of 10
+                {
+                    Sums += Tens[i / 10 - 2];
+                }
+
+                if (((i % 10) != 0) && (i >= 20) && (i < 100)) // between 10-100 and inter-vals of the multiples of 10
+                {
+                    Sums += Tens[i / 10 - 2];
+                    Sums += Ones[i % 10 - 1];
+                }
+
+                if (((i % 100) == 0) && (i < 1000)) // between 100-1000 and multiples of 100
+                {
+                    Sums += Hundreds[i / 100 - 1];
+                }
+
+                if ((i > 100) && ((i % 100) != 0) && (i < 1000)) // between 100-1000 and in-tervals of the multiples of 100
+                {
+                    Sums += Hundreds[(i / 100) - 1];
+                    Sums += And;
+
+                    if ((i % 100) < 10) // smaller then 10
+                    {
+                        Sums += Ones[(i % 100) - 1];
+                    }
+
+                    if (((i % 100) >= 10) && ((i % 100) < 20)) // between 10-20
+                    {
+                        Sums += OnesTens[(i % 100) % 10];
+                    }
+
+                    if ((((i % 100) % 10) == 0) && ((i % 100) >= 20) && ((i % 100) < 100)) // between 10-100 and multiples of 10
+                    {
+                        Sums += Tens[(i % 100) / 10 - 2];
+                    }
+
+                    if ((((i % 100) % 10) != 0) && ((i % 100) >= 20) && ((i % 100) < 100)) // between 10-100 and intervals of the multiples of 10
+                    {
+                        Sums += Tens[(i % 100) / 10 - 2];
+                        Sums += Ones[(i % 100) % 10 - 1];
+                    }
+
+                    if ((((i % 100) % 100) == 0) && ((i % 100) < 1000)) // between 100-1000 and mul-tiples of 100
+                    {
+                        Sums += Hundreds[(i % 100) / 100 - 1];
+                    }
+
+                }
+
+                if (i == 1000) // 1000
+                {
+                    Sums += OneThousand;
+                }
+
+            }
+
+            Console.WriteLine("result is {0} for {1}", Sums, MaxVal);
+            Console.WriteLine("");
+            Console.WriteLine("press any key to continue ...");
+            Console.ReadKey();
+        }
+    }
+}
+
+
+
+Give me a number and i calculate the sum of the total letter used
+while writing until it
+
+For Ex, total letter number will be 19 if you give me 5 -->
+one = 3, two = 3, three = 5, four = 3, five = 4 --> total is 19
+
+i dont count spaces or hyphens
+342 (three hundred and forty-two) will be 23
+and 115 (one hundred and fifteen) will be 20
+
+so give me the number now.
+but dont pass one thousand!
+1000
+result is 21124 for 1000
+
+press any key to continue ...
