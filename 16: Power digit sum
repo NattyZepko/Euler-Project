@@ -1,0 +1,53 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EulerProjectNatty
+{
+    
+    class Program
+    {
+        public static int[] mybignumber = new int[320];
+        static void Main(string[] args)
+        {
+            Console.WriteLine("2^15 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.\n\nWhat is the sum of the digits of the number 2^1000 ?\n\n");
+            int sum = 0;
+            mybignumber[1] = 1;
+            for (int i = 2; i < 320; i++) // initialize array
+                mybignumber[i] = 0;
+            for (int i=0;i<1000;i++) // perform multiplication 1000 times.
+            {
+                Multiplyarrayby2();
+            }
+            for (int i = 1; i < 320; i++) // add up all numbers.
+                sum += mybignumber[i];
+            Console.WriteLine("Solution: " + sum); // write result
+        }
+
+        public static void Multiplyarrayby2()
+        {
+            for (int i=1;i<320;i++)
+                mybignumber[i] *= 2; // multiply all digits by 2.
+            for (int i=1;i<320;i++)
+            {
+                if (mybignumber[i]>9) // Carry over the 10's.
+                {
+                    mybignumber[i + 1] += mybignumber[i] / 10;
+                    mybignumber[i] %= 10;
+                }
+            }
+        }
+    }
+}
+
+
+
+2^15 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
+
+What is the sum of the digits of the number 2^1000 ?
+
+
+Solution: 1366
+Press any key to continue . . .
