@@ -1,0 +1,84 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EulerProjectNatty
+{
+    class Program
+    {
+        public static int HowManySundays()
+        {
+            int[] daysInEachMonth = new int[]
+            {
+            31, // January
+            28,
+            31,
+            30,
+            31,
+            30,
+            31,
+            31,
+            30,
+            31,
+            30,
+            31  // December
+            };
+
+            int currentYear = 1900;
+            int currentDay = 7;
+            int currentMonth = 0;
+            int numberOfSundays = 0; // Counter
+            while (currentYear < 2001)
+            {
+                currentDay += 7;
+                int daysInMonth =
+                    currentMonth == 1 ?
+                        ((currentYear % 4 == 0) ? 29 : 28) :
+                        daysInEachMonth[currentMonth];
+                if (daysInEachMonth[currentMonth] < currentDay)
+                {
+                    currentDay -= daysInEachMonth[currentMonth];
+                    currentMonth++;
+                    if (currentMonth >= 12)
+                    {
+                        currentMonth = 0;
+                        currentYear++;
+                    }
+                    if (currentDay == 1 && currentYear > 1900)
+                    {
+                        numberOfSundays++;
+                    }
+                }
+            }
+            return numberOfSundays;
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("You are given the following information, but you may prefer to do some research for yourself.\n\n1 Jan 1900 was a Monday.\nThirty days has September,\nApril, June and November.\nAll the rest have thirty - one,\nSaving February alone,\nWhich has twenty - eight, rain or shine.\nAnd on leap years, twenty - nine.\nA leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.\n\nHow many Sundays fell on the first of the month during the twentieth century(1 Jan 1901 to 31 Dec 2000)?\n\n");
+            int solution = HowManySundays();
+            Console.WriteLine("Solution: " + solution); // write result
+        }        
+    }
+}
+
+
+
+You are given the following information, but you may prefer to do some research for yourself.
+
+1 Jan 1900 was a Monday.
+Thirty days has September,
+April, June and November.
+All the rest have thirty - one,
+Saving February alone,
+Which has twenty - eight, rain or shine.
+And on leap years, twenty - nine.
+A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.
+
+How many Sundays fell on the first of the month during the twentieth century(1 Jan 1901 to 31 Dec 2000)?
+
+
+Solution: 171
+Press any key to continue . . .
