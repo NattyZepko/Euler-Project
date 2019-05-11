@@ -1,0 +1,67 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EulerProjectNatty
+{
+    class Program
+    {
+
+        public static int FindTwin(int MyNumber)
+        {
+            int sum = 0;
+            for (int i = 1; i < ((MyNumber / 2) + 1); i++)
+            {
+                if (MyNumber % i == 0)
+                    sum += i;
+            }
+            return sum;
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Let d(n) be defined as the sum of proper divisors of n(numbers less than n which divide evenly into n).\nIf d(a) = b and d(b) = a, where a ≠ b, then a and b are an amicable pair and each of a and b are called amicable numbers.\n\nFor example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore d(220) = 284.The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.\n\nEvaluate the sum of all the amicable numbers under 10000.\n\n");
+            int solution = 0;
+            int MaybeTwin;
+            int TwinssTwin;
+            for (int i=1; i<10000;i++)
+            {
+                MaybeTwin = FindTwin(i);
+                if (MaybeTwin != i)
+                {
+                    TwinssTwin = FindTwin(MaybeTwin);
+                    if (TwinssTwin == i)
+                    {
+                        Console.WriteLine(i + " is " + MaybeTwin + "'s Twin!");
+                        solution += i;
+                    }
+                }
+            }
+            Console.WriteLine("Solution: " + solution); // write result
+        }        
+    }
+}
+
+
+Let d(n) be defined as the sum of proper divisors of n(numbers less than n which divide evenly into n).
+If d(a) = b and d(b) = a, where a ≠ b, then a and b are an amicable pair and each of a and b are called amicable numbers.
+
+For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore d(220) = 284.The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.
+
+Evaluate the sum of all the amicable numbers under 10000.
+
+
+220 is 284's Twin!
+284 is 220's Twin!
+1184 is 1210's Twin!
+1210 is 1184's Twin!
+2620 is 2924's Twin!
+2924 is 2620's Twin!
+5020 is 5564's Twin!
+5564 is 5020's Twin!
+6232 is 6368's Twin!
+6368 is 6232's Twin!
+Solution: 31626
+Press any key to continue . . .
