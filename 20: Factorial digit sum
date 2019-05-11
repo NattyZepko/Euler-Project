@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EulerProjectNatty
+{
+    class Program
+    {
+        public static int ArraySize = 160;
+        public static int[] BigNumber = new int[ArraySize]; // Using google, I found the number has 157 digits.
+         /* ALSO technically, since we are dealing with 100! it would be the same as 99!, because multiplying by 100 only
+            adds ZEROES to the number, that doesn't change the sum of the number's digits. 160 places is enough.*/
+        public static void InitializeArray(int[] thearray)
+        {
+            for (int i = 0; i < ArraySize; i++)
+                thearray[i] = 0;
+        }
+
+        public static void DecimalArranging(int[] thearray)
+        {
+            for (int i = 0; i < ArraySize; i++)
+            {
+                if (thearray[i] > 9)
+                {
+                    thearray[i + 1] += thearray[i] / 10;
+                    thearray[i] %= 10;
+                }
+            }
+        }
+
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("n! means n × (n − 1) × ... × 3 × 2 × 1\n\nFor example, 10! = 10 × 9 × ... × 3 × 2 × 1 = 3628800,\nand the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.\n\nFind the sum of the digits in the number 100!\n\n");
+            int solution = 0;
+            InitializeArray(BigNumber);
+            BigNumber[1] = 1; // I would prefer to work, with position 1, rather than 0, to make it comfortable.
+
+            for (int i=1; i<100; i++)
+            {
+                for (int j = 1; j < ArraySize; j++)
+                    BigNumber[j] *= i;
+                DecimalArranging(BigNumber);
+            }
+            for (int i = 1; i < ArraySize; i++)
+                solution += BigNumber[i];
+
+            Console.WriteLine("Solution: " + solution); // write result
+        }        
+    }
+}
+
+
+n! means n × (n − 1) × ... × 3 × 2 × 1
+
+For example, 10! = 10 × 9 × ... × 3 × 2 × 1 = 3628800,
+and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
+
+Find the sum of the digits in the number 100!
+
+
+Solution: 648
+Press any key to continue . . .
