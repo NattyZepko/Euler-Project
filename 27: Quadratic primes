@@ -1,0 +1,86 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EulerProjectNatty
+{
+    class Program
+    {
+        public static bool Isprime(int num)
+        {
+            if (num < 0)
+                return false;
+            if ((num == 0) || (num == 1))
+                return false;
+            if ((num == 2) || (num == 3))
+                return true;
+            for (int i = 2; i < num; i++)
+                if (num % i == 0)
+                    return false;
+            return true;
+        }
+
+        public static int LengthOfPrimes(int a, int b)
+        {
+            int count = 0;
+            int value = b;
+            while (Isprime(value))
+            {
+                count++;
+                value = (count * count) + (count * a) + b;
+            }
+            return count;
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Euler discovered the remarkable quadratic formula:\n\nn^2 + n + 41\n\nIt turns out that the formula will produce 40 primes for the consecutive integer values 0≤n≤39.\nHowever, when n = 40, 40^2 + 40 + 41 = 40(40 + 1) + 41 is divisible by 41, and certainly when n = 41, 41^2 + 41 + 41\n\nis clearly divisible by 41.\n\nThe incredible formula n2−79n + 1601\nwas discovered, which produces 80 primes for the consecutive values 0≤n≤79.\nThe product of the coefficients, −79 and 1601, is −126479.\nConsidering quadratics of the form:\n\n    n^2 + an + b,\n where | a |< 1000 and | b |≤1000\nwhere | n |\nis the modulus / absolute value of n\ne.g. | 11 |= 11 and |−4 |= 4\nFind the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n = 0.\n\n");
+            int solution = 0, maxa = 0, maxb = 0;
+            int maxlength = 0, result;
+            for (int a = -999; a < 1000; a++)
+            {
+                for (int b = 1; b <= 1000; b++)
+                {
+                    result = LengthOfPrimes(a, b);
+                    if (maxlength < result)
+                    {
+                        maxlength = result;
+                        solution = a * b;
+                        maxa = a;
+                        maxb = b;
+                    }
+                }
+            }
+            Console.WriteLine("Solution: " + solution + " built by a:" + maxa + " and b:" + maxb);
+        }
+    }
+}
+
+
+
+Euler discovered the remarkable quadratic formula:
+
+n^2 + n + 41
+
+It turns out that the formula will produce 40 primes for the consecutive integer values 0≤n≤39.
+However, when n = 40, 40^2 + 40 + 41 = 40(40 + 1) + 41 is divisible by 41, and certainly when n = 41, 41^2 + 41 + 41
+
+is clearly divisible by 41.
+
+The incredible formula n2−79n + 1601
+was discovered, which produces 80 primes for the consecutive values 0≤n≤79.
+The product of the coefficients, −79 and 1601, is −126479.
+Considering quadratics of the form:
+
+    n^2 + an + b,
+ where | a |< 1000 and | b |≤1000
+where | n |
+is the modulus / absolute value of n
+e.g. | 11 |= 11 and |−4 |= 4
+Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n = 0.
+
+
+Solution: -59231 built by a:-61 and b:971
+Press any key to continue . . .
