@@ -1,0 +1,98 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EulerProjectNatty
+{
+    class Program
+    {
+        public static int[] array1 = new int[1001];
+        public static int[] array2 = new int[1001];
+        public static int[] array3 = new int[1001];
+
+
+        public static void Starting()
+        {
+            for (int i=0;i<1001;i++)
+            {
+                array1[i] = 0;
+                array2[i] = 0;
+                array3[i] = 0;
+            }
+        }
+        public static void DecimalArrange()
+        {
+            for (int i=1;i<1001;i++)
+            {
+                if (array1[i]>9)
+                {
+                    array1[i + 1] += array1[i] / 10;
+                    array1[i] %= 10;
+                }
+                if (array2[i]>9)
+                {
+                    array2[i + 1] += array2[i] / 10;
+                    array2[i] %= 10;
+                }
+                if (array3[i] > 9)
+                {
+                    array3[i + 1] += array3[i] / 10;
+                    array3[i] %= 10;
+                }
+            }
+        }
+
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("The Fibonacci sequence is defined by the recurrence relation:\n\nFn = Fn−1 + Fn−2, where F1 = 1 and F2 = 1.\n\nHence the first 12 terms will be:\n\nF1 = 1\nF2 = 1\nF3 = 2\nF4 = 3\nF5 = 5\nF6 = 8\nF7 = 13\nF8 = 21\nF9 = 34\nF10 = 55\nF11 = 89\nF12 = 144\n\nThe 12th term, F12, is the first term to contain three digits.\nWhat is the index of the first term in the Fibonacci sequence to contain 1000 digits?\n\n");
+            Starting();
+            array1[1] = 1;
+            array2[1] = 1;
+            array3[1] = 2;
+            int counter = 3;
+            while (array3[1000]==0)
+            {
+                for (int i = 1; i < 1001; i++)
+                {
+                    array1[i] = array2[i];
+                    array2[i] = array3[i];
+                    array3[i] = array1[i] + array2[i];
+                }
+                counter++;
+                DecimalArrange();
+            }
+            Console.WriteLine("Solution: " + counter);
+
+        }
+    }
+}
+
+
+The Fibonacci sequence is defined by the recurrence relation:
+
+Fn = Fn−1 + Fn−2, where F1 = 1 and F2 = 1.
+
+Hence the first 12 terms will be:
+
+F1 = 1
+F2 = 1
+F3 = 2
+F4 = 3
+F5 = 5
+F6 = 8
+F7 = 13
+F8 = 21
+F9 = 34
+F10 = 55
+F11 = 89
+F12 = 144
+
+The 12th term, F12, is the first term to contain three digits.
+What is the index of the first term in the Fibonacci sequence to contain 1000 digits?
+
+
+Solution: 4782
+Press any key to continue . . .
