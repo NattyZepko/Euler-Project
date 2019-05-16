@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EulerProjectNatty
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("A unit fraction contains 1 in the numerator.\nThe decimal representation of the unit fractions with denominators 2 to 10 are given:    \n1 / 2 = 0.5    \n1 / 3 = 0.(3)    \n1 / 4 = 0.25    \n1 / 5 = 0.2    \n1 / 6 = 0.1(6)    \n1 / 7 = 0.(142857)    \n1 / 8 = 0.125    \n1 / 9 = 0.(1)    \n1 / 10 = 0.1\n\nWhere 0.1(6) means 0.166666..., and has a 1 - digit recurring cycle.It can be seen that 1 / 7 has a 6 - digit recurring cycle.\n\nFind the value of d < 1000 for which 1 / d contains the longest recurring cycle in its decimal fraction part.\n\n");
+            int solution = 0;
+            int chainlength = 0;
+
+            for (int i = 1000; i > 1; i--)
+            {
+                if (chainlength >= i) // if I found a cycle that is x length, obviously,
+                {                  // any number below x cannot have a cycle that is x long.
+                    break;         // therefore, I'll update "solution" to have the highest result
+                }                  // and break when I get to the number that is as big as the length of that cycle.
+
+                int[] Remainders = new int[i]; // Make an array of remainders
+                int value = 1;
+                int position = 0;
+
+                while (Remainders[value] == 0 && value != 0)
+                {
+                    Remainders[value] = position;
+                    value *= 10;
+                    value %= i;
+                    position++;
+                }
+
+                if (position - Remainders[value] > chainlength)
+                {
+                    solution = i;
+                    chainlength = position - Remainders[value];
+                }
+            }
+            Console.WriteLine("Solution: " + solution + " has a length of " + chainlength + " cycle.");
+        }
+    }
+}
+
+
+A unit fraction contains 1 in the numerator.
+The decimal representation of the unit fractions with denominators 2 to 10 are given:
+1 / 2 = 0.5
+1 / 3 = 0.(3)
+1 / 4 = 0.25
+1 / 5 = 0.2
+1 / 6 = 0.1(6)
+1 / 7 = 0.(142857)
+1 / 8 = 0.125
+1 / 9 = 0.(1)
+1 / 10 = 0.1
+
+Where 0.1(6) means 0.166666..., and has a 1 - digit recurring cycle.It can be seen that 1 / 7 has a 6 - digit recurring cycle.
+
+Find the value of d < 1000 for which 1 / d contains the longest recurring cycle in its decimal fraction part.
+
+
+Solution: 983 has a length of 982 cycle.
+Press any key to continue . . .
