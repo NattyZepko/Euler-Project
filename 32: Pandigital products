@@ -1,0 +1,74 @@
+
+
+namespace EulerProj
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            HashSet<int> numSet = new HashSet<int>();
+            int k, result;
+            for (int i = 1; i < 9999; i++)
+                for (int j = i; j < 9999; j++) // j = i instead of j=1 avoids checking 4*1738 and 1738*4 as they're the same product
+                {
+                    k = i * j;
+                    result = ContainsAllDigits(i, j, k);
+                    switch (result)
+                    {
+                        case 0: // FOUND
+                            Console.WriteLine("Found " + i + "*" + j + "=" + k);
+                            numSet.Add(k);
+                            break;
+
+                        case 2: // TOO LONG
+                            j = 9999; // We can skip the j part, as increasing it's size won't find any more items. Check the next i
+                            break;
+                    }
+                }
+            Console.WriteLine("Done. There are " + numSet.Count + " different products:");
+            Console.WriteLine(String.Join(", ", numSet.ToArray())); // List the products
+            Console.WriteLine("Their sum: " + numSet.Sum());
+        }
+
+        /*
+         * Return -1 if less than 9 digits
+         * Return 0 if EXACTLY 9 digits, and they're all the different << TARGET
+         * Return 1 if EXACTLY 9 digits, but aren't all different
+         * Return 2 if more than 9 digits
+         * Different return values indicate how we should act next
+         */
+        public static int ContainsAllDigits(int a, int b, int c)
+        {
+            String text = a.ToString();
+            text += b.ToString() + c.ToString();
+            if (text.Length < 9)
+                return -1; // Too short
+            if (text.Length > 9)
+                return 2; // Too long
+            for (int i = 1; i < 10; i++)
+            {
+                if (!text.Contains(((char)(i + 48)))) // doesn't contain a digit
+                    return 1;
+            }
+            return 0;
+        }
+    }
+}
+
+
+Found 4*1738=6952
+Found 4*1963=7852
+Found 12*483=5796
+Found 18*297=5346
+Found 27*198=5346
+Found 28*157=4396
+Found 39*186=7254
+Found 42*138=5796
+Found 48*159=7632
+Done. There are 7 different products:
+6952, 7852, 5796, 5346, 4396, 7254, 7632
+Their sum: 45228
+
+D:\מסמכים\Visual Studio\projects\EulerProj\bin\Debug\net6.0\EulerProj.exe (process 19396) exited with code 0.
+To automatically close the console when debugging stops, enable Tools->Options->Debugging->Automatically close the console when debugging stops.
+Press any key to close this window . . .
